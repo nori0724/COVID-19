@@ -8,8 +8,8 @@ install.packages("flexsurv")
 # install.packages("survival")
 # remove.packages("survival")
 
-#df <- read.csv("/Users/masanoritakahashi/Documents/講義/ゼミ/M2/空間生存時間/論文/covid19/data_covid.csv")
-df <- read.xlsx("/Users/masanoritakahashi/Documents/講義/ゼミ/M2/空間生存時間/論文/covid19/data_covid_fix_name.xlsx")
+#df <- read.csv("/Users/masanoritakahashi/Documents/講義/ゼミ/M2/空間生存時間/COVID-19/data/data_covid.csv")
+df <- read.xlsx("/Users/masanoritakahashi/Documents/講義/ゼミ/M2/空間生存時間/COVID-19/data/data_covid_fix_name.xlsx")
 df <- na.omit(df)
 head(df)
 df
@@ -60,9 +60,9 @@ summary(model_p) #1333.6
 # mapping
 install.packages("rworldmap")
 library(rworldmap)
-df <- read.xlsx("/Users/masanoritakahashi/Documents/講義/ゼミ/M2/空間生存時間/論文/covid19/data_covid_fix_name.xlsx")
+df <- read.xlsx("/Users/masanoritakahashi/Documents/講義/ゼミ/M2/空間生存時間/COVID-19/data/data_covid_fix_name.xlsx")
 map_obj <- joinCountryData2Map(df, joinCode="NAME", nameJoinColumn="country")
-png("/Users/masanoritakahashi/Documents/講義/ゼミ/M2/空間生存時間/論文/covid19/map/data_first.png", width=960, height=540)
+png("/Users/masanoritakahashi/Documents/講義/ゼミ/M2/空間生存時間/COVID-19/map/data_first.png", width=960, height=540)
 par(family="Osaka")
 mapCountryData(map_obj, nameColumnToPlot="date_first"
                , catMethod="fixedWidth"
@@ -80,10 +80,10 @@ x <- map("world", plot=FALSE)
 x$names[grep("Timor", x$names)]
 
 ##################################3
-df0712 <- read.csv("/Users/masanoritakahashi/Documents/講義/ゼミ/M2/空間生存時間/論文/covid19/covid19_0712_cases.csv")
+df0712 <- read.csv("/Users/masanoritakahashi/Documents/講義/ゼミ/M2/空間生存時間/COVID-19/data/covid19_0712_cases.csv")
 df0712 = df0712[df0712$Cumulative_number_for_14_days_of_COVID.19_cases_per_100000>0,]
 map_obj <- joinCountryData2Map(df0712, joinCode="NAME", nameJoinColumn="fix_country")
-png("/Users/masanoritakahashi/Documents/講義/ゼミ/M2/空間生存時間/論文/covid19/map/covid19_0712_cases.png", width=960, height=540)
+png("/Users/masanoritakahashi/Documents/講義/ゼミ/M2/空間生存時間/COVID-19/map/covid19_0712_cases.png", width=960, height=540)
 par(family="Osaka")
 mapCountryData(map_obj, nameColumnToPlot="Cumulative_number_for_14_days_of_COVID.19_cases_per_100000"
                , catMethod="fixedWidth"
@@ -93,9 +93,9 @@ dev.off()
 
 ##################################3
 # コロナ収束までの日数
-converge <- read.csv("/Users/masanoritakahashi/Documents/講義/ゼミ/M2/空間生存時間/論文/covid19/corona_converge_days.csv")
+converge <- read.csv("/Users/masanoritakahashi/Documents/講義/ゼミ/M2/空間生存時間/COVID-19/data/corona_converge_days.csv")
 map_obj <- joinCountryData2Map(converge, joinCode="NAME", nameJoinColumn="country")
-png("/Users/masanoritakahashi/Documents/講義/ゼミ/M2/空間生存時間/論文/covid19/map/corona_converge_days.png", width=960, height=540)
+png("/Users/masanoritakahashi/Documents/講義/ゼミ/M2/空間生存時間/COVID-19/map/corona_converge_days.png", width=960, height=540)
 par(family="Osaka")
 mapCountryData(map_obj, nameColumnToPlot="corona_converge_days"
                , catMethod="fixedWidth"
@@ -119,7 +119,7 @@ summary(mod)
 AIC(mod)
 plot(mod)
 
-# 予測
+# fit
 mod.fit<-survfit(mod)
 plot(mod.fit)
 par(new=T)
